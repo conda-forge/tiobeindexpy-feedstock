@@ -6,22 +6,22 @@ package:
   version: {{ version }}
 
 source:
-  url: https://pypi.io/packages/source/{{ name[0] }}/{{ name }}/tiobeindexpy-{{ version }}.tar.gz
+  url: https://pypi.org/packages/source/{{ name[0] }}/{{ name }}/tiobeindexpy-{{ version }}.tar.gz
   sha256: 4f2cae16c9a9b397fc8fc1889bde143a9ad68702b839157bf556d59cb34c76c9
 
 build:
   noarch: python
   script: {{ PYTHON }} -m pip install . -vv
-  number: 0
+  number: 1
 
 requirements:
   host:
     - pip
-    - python >=3.6
+    - python {{ python_min }}
   run:
     - beautifulsoup4
     - pandas
-    - python >=3.6
+    - python >={{ python_min }}
     - requests
 
 test:
@@ -31,6 +31,7 @@ test:
     - pip check
   requires:
     - pip
+    - python {{ python_min }}
 
 about:
   home: https://github.com/amrrs/tiobeindexpy
